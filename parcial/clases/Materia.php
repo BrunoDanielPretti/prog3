@@ -14,29 +14,25 @@ class Materia{
     }
 
     public static function Put_BD(){
-        if( $_POST['email'] != null && !self::Check_email ($_POST['email']) ){
-
-            if(!move_uploaded_file($_FILES["foto"]["tmp_name"], self::$fotos_path.$_POST['email'].".jpg") ){
-                echo "Error en la foto";
-                return false;
-            }
-            $miAlumno = new Alumno(
-                $_POST['email'],
+        if( $_POST['codigo'] != null && !self::Check_Codigo ($_POST['codigo']) ){
+            
+            $miMateria = new Materia(
+                $_POST['codigo'],
                 $_POST['nombre'],
-                $_POST['apellido'],
-                $_POST['email'].".jpg"
+                $_POST['aula'],
+                $_POST['cupo']
             );
             $file = fopen( self::$arch_path, 'a');
-            fwrite( $file, $miAlumno->ToString()."\n" );            
+            fwrite( $file, $miMateria->ToString()."\n" );            
             fclose($file);
         }else{
-            echo "No se pudo ingresar el Alumno";
+            echo "No se pudo ingresar la Materia";
         }
     }
 
     //--------------------------------------------------------------------------------------------------
     public static function TraerTodos(){
-        $listaDeAlumnos = array();
+        $listaDeMaterias = array();
         $file = fopen( self::$arch_path, "r");
 
         while( !feof($file) ){
@@ -44,20 +40,24 @@ class Materia{
             $datos = explode(" - ", $auxLinea);
             $datos[0] = trim($datos[0]);
             if($datos[0] != ""){
-                $listaDeAlumnos[] = new Alumno($datos[0], $datos[1], $datos[2], $datos[3]);
+                $listaDeMaterias[] = new Materia($datos[0], $datos[1], $datos[2], $datos[3]);
             }            
         }
         fclose($file);
-        return $listaDeAlumnos;     
+        return $listaDeMaterias;     
     }
-    public static function Check_email($pEmail){
-        $alumnos = self::TraerTodos();        
-        foreach ($alumnos as $val) {
-            if( strtolower($val->email) == strtolower($pEmail) ){
+    public static function Check_Codigo($pCodigo){
+        $materias = self::TraerTodos();        
+        foreach ($materias as $val) {
+            if( strtolower($val->codigo) == strtolower($pCodigo) ){
                 return true;
             }          
         }
         return false;       
+    }
+
+    public function ToString(){
+        return "$this->codigo - $this->nombre - $this->aula - $this->cupo";
     }
 
     //-------------------------------------------------

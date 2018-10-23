@@ -21,6 +21,11 @@ switch ($queHago) {
     case 'consultarAlumno':
         Alumno::Get_BD_PorApellido();        
         break;
+    case 'cargarMateria':
+        Materia::Put_BD();        
+        break;
+
+
     case 'Prueba':
         Materia::Prueba();        
         break;
