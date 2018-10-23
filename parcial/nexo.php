@@ -1,6 +1,7 @@
 <?php
 require_once("clases/Alumno.php");
 require_once("clases/Materia.php");
+require_once("clases/Inscripcion.php");
 
 //echo "Nexo.php!!!<br>";
 $queHago = isset($_POST['queHago']) ? $_POST['queHago'] : null;

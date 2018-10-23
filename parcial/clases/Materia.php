@@ -1,10 +1,13 @@
 <?php
+
+
 class Materia{
     private $codigo;
     private $nombre;
     private $aula;
     private $cupo;
     private static $arch_path = 'data/materias.txt';
+    
 
     public function __construct($pCodigo=null, $pNombre=null, $pAula=null, $pCupo=null){
         $this->codigo    = $pCodigo;
@@ -30,6 +33,8 @@ class Materia{
         }
     }
 
+    
+
     //--------------------------------------------------------------------------------------------------
     public static function TraerTodos(){
         $listaDeMaterias = array();
@@ -46,19 +51,20 @@ class Materia{
         fclose($file);
         return $listaDeMaterias;     
     }
+    
     public static function Check_Codigo($pCodigo){
         $materias = self::TraerTodos();        
         foreach ($materias as $val) {
             if( strtolower($val->codigo) == strtolower($pCodigo) ){
-                return true;
+                return $val;
             }          
         }
         return false;       
     }
-
     public function ToString(){
         return "$this->codigo - $this->nombre - $this->aula - $this->cupo";
     }
+   
 
     //-------------------------------------------------
 
