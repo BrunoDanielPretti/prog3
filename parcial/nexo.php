@@ -1,5 +1,6 @@
 <?php
 require_once("clases/Alumno.php");
+require_once("clases/Materia.php");
 
 //echo "Nexo.php!!!<br>";
 $queHago = isset($_POST['queHago']) ? $_POST['queHago'] : null;
@@ -21,7 +22,7 @@ switch ($queHago) {
         Alumno::Get_BD_PorApellido();        
         break;
     case 'Prueba':
-        Alumno::Prueba();        
+        Materia::Prueba();        
         break;
 
     case 'LimpiarAlumnos':
