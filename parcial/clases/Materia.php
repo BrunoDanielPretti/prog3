@@ -2,10 +2,10 @@
 
 
 class Materia{
-    private $codigo;
-    private $nombre;
-    private $aula;
-    private $cupo;
+    public $codigo;
+    public $nombre;
+    public $aula;
+    public $cupo;
     private static $arch_path = 'data/materias.txt';
     
 

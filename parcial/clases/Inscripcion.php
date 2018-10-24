@@ -20,21 +20,21 @@ class Inscripcion{
 
 
     public static function Inscribir_Alumno(){
-        $miMateria = Materia::Check_Codigo($_POST['codigo']) ;
+        $miMateria = Materia::Check_Codigo($_GET['codigo']) ;
 
         if( $miMateria == false ){
             echo "No existe esa Materia";
             return false;
         }
-        if( self::CantidadDeInscriptos($_POST['codigo']) >= (int)$miMateria->cupo){
+        if( self::CantidadDeInscriptos($_GET['codigo']) >= (int)$miMateria->cupo){
             echo "No hay cupo, el cupo maximo es: ".$miMateria->cupo;
             return false;
         }
 
         $miAlumno = new Alumno(
-            $_POST['email'],
-            $_POST['nombre'],
-            $_POST['apellido'],            
+            $_GET['email'],
+            $_GET['nombre'],
+            $_GET['apellido']         
         );
         
         $miInscripcion = new Inscripcion(
@@ -48,6 +48,34 @@ class Inscripcion{
         $file = fopen( self::$arch_inscripciones, 'a');
         fwrite( $file, $miInscripcion->ToString()."\n" );            
         fclose($file);
+    }
+
+    public static function MostrarTabla(){
+        $grilla = '<table class="table">
+                        <thead>
+                            <tr>
+                                <th>  Nombre </th>
+                                <th>  Apellido     </th>
+                                <th>  Email       </th>
+                                <th>  Materia     </th>
+                                <th>  Cod. Materia  </th>
+                            </tr> 
+                        </thead>';  
+                        
+        $inscript = self::TraerTodos();
+
+        foreach ($inscrip as $val) {
+            $grilla .= "<tr>
+            <td>".$val->nombre."</td>
+            <td>".$val->apellido."</td>
+            <td>".$val->email."</td>
+            <td>".$val->materia."</td>
+            <td>".$val->codigo."</td>            
+        </tr>";
+        }
+
+        $grilla .= '</table>';				
+		echo $grilla;
     }
 
     //-------------------------------------------------------------------

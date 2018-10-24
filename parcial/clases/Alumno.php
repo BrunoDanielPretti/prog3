@@ -1,10 +1,10 @@
 <?php
 class Alumno{
 
-    private $email;
-    private $nombre;
-    private $apellido;        
-    private $foto;
+    public $email;
+    public $nombre;
+    public $apellido;        
+    public $foto;
     private static $arch_path = 'data/alumnos.txt';
     private static $fotos_path = 'data/fotos/';
 

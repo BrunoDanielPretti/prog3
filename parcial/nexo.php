@@ -25,7 +25,12 @@ switch ($queHago) {
     case 'cargarMateria':
         Materia::Put_BD();        
         break;
-
+    case 'inscribirAlumno':
+        Inscripcion::Inscribir_Alumno();
+        break;
+    case 'inscripciones':
+        Inscripcion::MostrarTabla();
+        break;
 
     case 'Prueba':
         Materia::Prueba();        
