@@ -10,14 +10,13 @@ class Inscripcion{
     private $materia;
     private static $arch_inscripciones = 'data/inscripciones.txt';
 
-    public function __construct($pEmail=null, $pNombre=null, $pApellido=null, $pCodigo=null, $pCupo=null){
+    public function __construct($pEmail=null, $pNombre=null, $pApellido=null, $pCodigo=null, $pMateria=null){
         $this->email    = $pEmail;
         $this->nombre   = $pNombre;
         $this->apellido = $pApellido;            
         $this->codigo    = $pCodigo;
-        $this->cupo     = $pCupo;
+        $this->materia     = $pMateria;
     }
-
 
     public static function Inscribir_Alumno(){
         $miMateria = Materia::Check_Codigo($_GET['codigo']) ;
@@ -56,28 +55,30 @@ class Inscripcion{
                             <tr>
                                 <th>  Nombre </th>
                                 <th>  Apellido     </th>
-                                <th>  Email       </th>
-                                <th>  Materia     </th>
+                                <th>  Email       </th> 
+                                <th>  Materia       </th>                                
                                 <th>  Cod. Materia  </th>
                             </tr> 
                         </thead>';  
                         
         $inscript = self::TraerTodos();
-
-        foreach ($inscrip as $val) {
-            $grilla .= "<tr>
-            <td>".$val->nombre."</td>
-            <td>".$val->apellido."</td>
-            <td>".$val->email."</td>
-            <td>".$val->materia."</td>
-            <td>".$val->codigo."</td>            
-        </tr>";
+       
+        foreach ($inscript as $val) {           
+                $grilla .= $val->escribirTD();                    
         }
 
         $grilla .= '</table>';				
 		echo $grilla;
     }
 
+    public function escribirTD(){
+        return "<tr>
+        <td>".$this->nombre."</td>s
+        <td>".$this->apellido."</td>
+        <td>".$this->email."</td>            
+        <td>".$this->materia."</td>   
+        <td>".$this->codigo."</td>";     
+    }
     //-------------------------------------------------------------------
     public static function TraerTodos(){
         $Lista = array();
@@ -107,7 +108,7 @@ class Inscripcion{
     }
    
     public function ToString(){
-        return "$this->email - $this->nombre - $this->apellido - $this->codigo - $this->cupo";
+        return "$this->email - $this->nombre - $this->apellido - $this->codigo - $this->materia";
     }
 }
 

@@ -11,11 +11,7 @@ if( isset($_GET['queHago']) ){
 }
 //var_dump($queHago);
 
-switch ($queHago) {
-    case 'Saludar':
-        echo "ola q ase";
-        break;
-    
+switch ($queHago) {   
     case 'cargarAlumno':
         Alumno::Put_BD();        
         break;
@@ -31,15 +27,10 @@ switch ($queHago) {
     case 'inscripciones':
         Inscripcion::MostrarTabla();
         break;
-
-    case 'Prueba':
-        Materia::Prueba();        
+    case 'alumnos':
+        Alumno::MostrarTabla();
         break;
-
-    case 'LimpiarAlumnos':
-        $file = fopen('data/alumnos.txt', 'w');
-        fclose($file);
-        break;
+   
     default:     
         echo "Error, Pagina no encontrada";  
         break;

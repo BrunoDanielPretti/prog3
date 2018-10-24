@@ -48,6 +48,32 @@ class Alumno{
             echo "No existe alumno con apellido ".$_GET['apellido'];
         }
     }  
+
+    public static function MostrarTabla(){
+        $grilla = '<table class="table">
+                        <thead>
+                            <tr>
+                                <th>  Nombre </th>
+                                <th>  Apellido     </th>
+                                <th>  Email       </th> 
+                                <th>  Foto       </th>                                                               
+                            </tr> 
+                        </thead>';  
+                        
+        $inscript = self::TraerTodos();
+
+        foreach ($inscript as $val) {
+            $grilla .= "<tr>
+            <td>".$val->nombre."</td>s
+            <td>".$val->apellido."</td>
+            <td>".$val->email."</td>            
+            <td><img src='../data/fotos/".$val->foto."' width='50px' height='50px' /></td>                       
+        </tr>";
+        }
+
+        $grilla .= '</table>';				
+		echo $grilla;
+    }
 //--------------------------------------------------------------------------------------------------
     public static function TraerTodos(){
         $listaDeAlumnos = array();

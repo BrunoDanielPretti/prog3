@@ -68,9 +68,7 @@ class Materia{
 
     //-------------------------------------------------
 
-    public function Prueba(){
-        echo "Hola clase Materia!!";
-    }
+  
 
 
 }
