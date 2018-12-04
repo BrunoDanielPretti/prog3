@@ -31,13 +31,13 @@ $app->post('[/]', function (Request $request, Response $response){
     $response->getBody()->write("POST => Bienvenido!!! a SlimFramework");
     return $response;
 });
-
+/*
 $app->get('/{nombre}[/]', function (Request $request, Response $response, $args) {    
     $response->getBody()->write("GET => Bienvenido!!! a SlimFramework $args['nombre']");
     return $response;
 
 });
-
+*/
 /*
 COMPLETAR POST, PUT Y DELETE
 */
